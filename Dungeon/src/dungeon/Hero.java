@@ -1,4 +1,4 @@
-
+package dungeon;
 import java.util.Scanner;
 
 public abstract class Hero extends DungeonCharacter{
@@ -57,3 +57,4 @@ public abstract class Hero extends DungeonCharacter{
 
 	}
 }
+

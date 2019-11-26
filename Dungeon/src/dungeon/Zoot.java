@@ -1,3 +1,4 @@
+package dungeon;
 
 public class Zoot extends Hero{
 	
@@ -14,3 +15,4 @@ public class Zoot extends Hero{
 		super.attack(opponent);
 	}
 }
+

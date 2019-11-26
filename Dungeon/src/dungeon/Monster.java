@@ -1,3 +1,5 @@
+package dungeon;
+
 
 public class Monster extends DungeonCharacter{
 	
@@ -40,3 +42,4 @@ public class Monster extends DungeonCharacter{
 		super.attack(opponent);
 	}
 }
+

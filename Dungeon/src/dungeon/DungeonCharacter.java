@@ -1,3 +1,4 @@
+package dungeon;
 
 public abstract class DungeonCharacter{
 	
@@ -79,3 +80,4 @@ public abstract class DungeonCharacter{
 
 	}
 }
+
