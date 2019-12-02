@@ -1,10 +1,135 @@
 package dungeon;
+import java.util.Random;
 
 public class Room {
 	
-	int xLoc;
-	int yLoc;
+	int xDimension = 5;
+	int yDimension = 5;
+	boolean hPotion;
+	boolean vPotion;
+	boolean pit;
+	boolean m;
+	boolean entrance;
+	boolean exit;
+	boolean pillarE;
+	boolean pillarA;
+	boolean pillarI;
+	boolean pillarP;
+	Tile[][] floorTile = new Tile[5][5];
 	
+	public void initializeTiles() {
+		
+		Random rand = new Random();
+		int xRand = rand.nextInt(xDimension);
+		int yRand = rand.nextInt(yDimension);
+		if(!entrance && !exit) {
+			int randTemp = rand.nextInt(10);
+			if(randTemp == 0)
+				hPotion = true;
+			randTemp = rand.nextInt(20);
+			if(randTemp == 0)
+				vPotion = true;
+			randTemp = rand.nextInt(5);
+			if(randTemp == 0)
+				pit = true;
+			randTemp = rand.nextInt(10);
+			if(randTemp == 0)
+				m = true;
+		}
+		for(int x = 0; x < xDimension; x++) {
+			for(int y = 0; y < yDimension; y++)
+				floorTile[x][y] = new Tile();
+		}
+		if(entrance) {
+			floorTile[xRand][yRand].entrance = true;
+			floorTile[xRand][yRand].contains = true;
+		}else if(exit) {
+			xRand = rand.nextInt(xDimension);
+			yRand = rand.nextInt(yDimension);
+			floorTile[xRand][yRand].exit = true;
+			floorTile[xRand][yRand].contains = true;
+		}else if(hPotion || vPotion || pit || pillarE || pillarA || pillarI || pillarP) {
+			if(pit) {
+				for(int x = 0; x <= 2; x++) {
+					do {
+						xRand = rand.nextInt(xDimension);
+						yRand = rand.nextInt(yDimension);
+						if(!floorTile[xRand][yRand].contains) {
+							floorTile[xRand][yRand].pit = true;
+							floorTile[xRand][yRand].contains = true;
+							break;
+						}
+					}while(floorTile[xRand][yRand].contains);
+				}
+			}
+			if(hPotion) {
+				do {
+					xRand = rand.nextInt(xDimension);
+					yRand = rand.nextInt(yDimension);
+					if(!floorTile[xRand][yRand].contains) {
+						floorTile[xRand][yRand].hPotion = true;
+						floorTile[xRand][yRand].contains = true;
+						break;
+					}
+				}while(floorTile[xRand][yRand].contains);
+			}
+			if(vPotion) {
+				do {
+					xRand = rand.nextInt(xDimension);
+					yRand = rand.nextInt(yDimension);
+					if(!floorTile[xRand][yRand].contains) {
+						floorTile[xRand][yRand].vPotion = true;
+						floorTile[xRand][yRand].contains = true;
+						break;
+					}
+				}while(floorTile[xRand][yRand].contains);
+			}
+			if(pillarE) {
+				do {
+					xRand = rand.nextInt(xDimension);
+					yRand = rand.nextInt(yDimension);
+					if(!floorTile[xRand][yRand].contains) {
+						floorTile[xRand][yRand].pillarE = true;
+						floorTile[xRand][yRand].contains = true;
+						break;
+					}
+				}while(floorTile[xRand][yRand].contains);
+			}
+			if(pillarA) {
+				do {
+					xRand = rand.nextInt(xDimension);
+					yRand = rand.nextInt(yDimension);
+					if(!floorTile[xRand][yRand].contains) {
+						floorTile[xRand][yRand].pillarA = true;
+						floorTile[xRand][yRand].contains = true;
+						break;
+					}
+				}while(floorTile[xRand][yRand].contains);
+			}
+			if(pillarI) {
+				do {
+					xRand = rand.nextInt(xDimension);
+					yRand = rand.nextInt(yDimension);
+					if(!floorTile[xRand][yRand].contains) {
+						floorTile[xRand][yRand].pillarI = true;
+						floorTile[xRand][yRand].contains = true;
+						break;
+					}
+				}while(floorTile[xRand][yRand].contains);
+			}
+			if(pillarP) {
+				do {
+					xRand = rand.nextInt(xDimension);
+					yRand = rand.nextInt(yDimension);
+					if(!floorTile[xRand][yRand].contains) {
+						floorTile[xRand][yRand].pillarP = true;
+						floorTile[xRand][yRand].contains = true;
+						break;
+					}
+				}while(floorTile[xRand][yRand].contains);
+			}
+		}
+	}
 }
 /*
  Contains default constructor and all methods you deem necessary -- modular design is CRUCIAL

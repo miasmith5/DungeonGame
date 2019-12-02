@@ -56,5 +56,17 @@ public abstract class Hero extends DungeonCharacter{
 		} while(numTurns > 0);
 
 	}
-}
 
+	public static Hero factory(String input) {
+		
+		if(input == null)
+			return null;	
+	    if(input.equals("1"))
+	        return new KingArthur();
+	    else if(input.equals("2"))
+	         return new BraveSirRobin(); 
+	    else if(input.equals("3"))
+	         return new Zoot();
+	    return null;
+	}
+}
