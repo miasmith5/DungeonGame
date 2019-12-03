@@ -49,19 +49,14 @@ public class DungeonAdventure {
 				}
 			}
 		}
-		//put main character at location
 		kb.close();
-		/*for(int x = 0; x < dungeon.xDimension; x++) {
-			for(int y = 0; y < dungeon.yDimension; y++) {
-				System.out.println("\n*******");
-				for(int rx = 0; rx < dungeon.dungeonRoom[x][y].xDimension; rx++) {
-					for(int ry = 0; ry < dungeon.dungeonRoom[x][y].yDimension; ry++) {
-						
-					}
-				}
-				System.out.println("\n*******");
-			}
-		}*///start of basic display
+		//displays all rooms
+		/*for(int y = dungeon.yDimension-1; y >= 0; y--) {
+			for(int x = 0; x < dungeon.xDimension; x++)
+				displayRoom(x,y);
+		}*/
+		displayRoom(dungeonXLoc, dungeonYLoc);
+		//System.out.println(dungeonXLoc+" "+dungeonYLoc);
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -70,34 +65,81 @@ public class DungeonAdventure {
             if(roomXLoc > 0) {
             	roomXLoc--;
             	dungeon.dungeonRoom[dungeonXLoc][dungeonYLoc].floorTile[roomXLoc][roomYLoc].checkContains(mainHero);
-            	//update display
+            	displayRoom(dungeonXLoc, dungeonYLoc);
             }
         }
         if (key == KeyEvent.VK_RIGHT) {
         	if(roomXLoc < 4) {
             	roomXLoc++;
             	dungeon.dungeonRoom[dungeonXLoc][dungeonYLoc].floorTile[roomXLoc][roomYLoc].checkContains(mainHero);
-            	//update display
+            	displayRoom(dungeonXLoc, dungeonYLoc);
         	}
         }
         if (key == KeyEvent.VK_UP) {
         	if(roomYLoc < 4) {
             	roomYLoc++;
             	dungeon.dungeonRoom[dungeonXLoc][dungeonYLoc].floorTile[roomXLoc][roomYLoc].checkContains(mainHero);
-            	//update display
+            	displayRoom(dungeonXLoc, dungeonYLoc);
         	}
         }
         if (key == KeyEvent.VK_DOWN) {
         	if(roomYLoc > 0) {
             	roomYLoc--;
             	dungeon.dungeonRoom[dungeonXLoc][dungeonYLoc].floorTile[roomXLoc][roomYLoc].checkContains(mainHero);
-            	//update display
+            	displayRoom(dungeonXLoc, dungeonYLoc);
         	}
         }
         if(key == KeyEvent.VK_S) {
         	//save game
         }
     }
+	
+	public static void displayRoom(int x, int y) {
+		
+		if(y < 4)
+			System.out.println("- - - D - - -");
+		else
+			System.out.println("- - - - - - -");
+		for(int ry = dungeon.dungeonRoom[x][y].yDimension-1; ry >= 0; ry--) {
+			if(ry == 2 && x != 0)
+				System.out.print("D");
+			else
+				System.out.print("|");
+			for(int rx = 0; rx < dungeon.dungeonRoom[x][y].xDimension; rx++) {
+				if(rx == roomXLoc && ry == roomYLoc && dungeonXLoc == x && dungeonYLoc == y)
+					System.out.print(" C");
+				else if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].contains) {
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].hPotion)
+						System.out.print(" H");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].vPotion)
+						System.out.print(" V");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].pit)
+						System.out.print(" O");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].pillarE)
+						System.out.print(" E");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].pillarA)
+						System.out.print(" A");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].pillarI)
+						System.out.print(" I");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].pillarP)
+						System.out.print(" P");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].entrance)
+						System.out.print(" B");
+					if(dungeon.dungeonRoom[x][y].floorTile[rx][ry].exit)
+						System.out.print(" Z");
+				}else 
+					System.out.print(" #");
+			}
+			if(ry == 2 && x != 4)
+				System.out.println(" D");
+			else
+				System.out.println(" |");
+		}
+		if(y > 0)
+			System.out.println("- - - D - - -");
+		else
+			System.out.println("- - - - - - -");
+	}
 
 	public static void gameOver(String res) {
 		//end game
