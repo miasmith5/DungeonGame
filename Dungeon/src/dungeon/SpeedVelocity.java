@@ -2,7 +2,6 @@ package dungeon;
 public class SpeedVelocity{
     @Override
 	public void attack(DungeonCharacter player, DungeonCharacter opponent) {
-		double surprise = Math.random();
 		if (player.name.equals("African")){
 			player.damageMax = 11; //meters per second
 			player.attack(opponent);
